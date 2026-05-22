@@ -1,0 +1,184 @@
+/* ═══════════════════════════════════════════════
+   DISCIPLINES — Skill cards.
+   Cursor-tracking spotlight + tool-list reveal on hover.
+   ═══════════════════════════════════════════════ */
+
+.section {
+  padding-top: 140px;
+  padding-bottom: 140px;
+  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+}
+
+/* Header */
+.header {
+  margin-bottom: 64px;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+.headerInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.count {
+  color: var(--iron);
+}
+
+.sectionTitle {
+  font-size: clamp(3rem, 7vw, 6rem);
+  color: var(--linen);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+/* ── Grid: 3 columns desktop, 2 tablet, 1 mobile ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: oklch(94% 0.008 30 / 0.08);
+  border-top: 1px solid oklch(94% 0.008 30 / 0.08);
+  border-bottom: 1px solid oklch(94% 0.008 30 / 0.08);
+}
+
+/* ── Card ── */
+.card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  background: var(--pitch);
+  padding: 0;
+  cursor: none;
+  overflow: hidden;            /* contains icon and spotlight */
+  isolation: isolate;
+}
+
+/* Cursor-tracking spotlight — soft orange glow follows mouse inside card */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    220px circle at var(--mx) var(--my),
+    oklch(64% 0.225 36 / 0.16),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out-expo);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Corner accent — top-right tick that grows on hover */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 0;
+  height: 1px;
+  background: var(--reactor);
+  transition: width 0.5s var(--ease-out-expo);
+  z-index: 2;
+}
+
+.card:hover::after {
+  width: 36px;
+}
+
+.cardInner {
+  position: relative;
+  z-index: 2;
+  padding: 40px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  perspective: 1000px;
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transition: transform 0.4s var(--ease-out-expo);
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  background: oklch(11% 0.012 30);
+}
+
+.card:hover .cardName {
+  color: var(--reactor);
+}
+
+.card:hover .cardIcon {
+  color: var(--reactor);
+  transform: scale(1.05);
+}
+
+.card:hover .cardTools {
+  color: var(--paper);
+}
+
+/* Number, top-left */
+.cardNum {
+  color: var(--reactor);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+/* Icon */
+.cardIcon {
+  font-size: 24px;
+  color: var(--bone);
+  display: inline-block;
+  transition: color 0.3s var(--ease-out-expo),
+              transform 0.4s var(--ease-out-expo);
+}
+
+/* Name */
+.cardName {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 700;
+  color: var(--linen);
+  letter-spacing: -0.01em;
+  transition: color 0.3s var(--ease-out-expo);
+  margin: 0;
+}
+
+/* Tools list */
+.cardTools {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--concrete);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  transition: color 0.4s var(--ease-out-expo);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .cardInner {
+    padding: 32px 24px;
+  }
+}

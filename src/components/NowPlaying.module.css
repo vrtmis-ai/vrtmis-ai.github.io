@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════════════
+   NOW PLAYING — "What I'm currently working on" panel.
+   ═══════════════════════════════════════════════ */
+
+.section {
+  padding: 80px clamp(24px, 5vw, 80px);
+  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+}
+
+.frame {
+  border: 1px solid oklch(94% 0.008 30 / 0.10);
+  padding: 32px;
+  background: oklch(10% 0.012 30);
+  position: relative;
+}
+
+/* Top bar */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid oklch(94% 0.008 30 / 0.08);
+  padding-bottom: 18px;
+  margin-bottom: 28px;
+}
+
+.rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--reactor);
+}
+
+.recDot {
+  width: 8px;
+  height: 8px;
+  background: var(--reactor);
+  border-radius: 50%;
+  /* Gentle "live" pulse — opacity 0.6 ↔ 1 every 3s. Much softer than the
+     original 0.25 ↔ 1 every 1.4s, which read as flicker even off-screen. */
+  animation: recPulseSoft 3s ease-in-out infinite;
+}
+
+@keyframes recPulseSoft {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.6; }
+}
+
+.week {
+  color: var(--iron);
+  font-size: 11px;
+}
+
+/* Body */
+.body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: clamp(22px, 3vw, 36px);
+  color: var(--linen);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin: 0;
+}
+
+.client {
+  color: var(--bone);
+  font-size: 12px;
+}
+
+.status {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--reactor);
+  border: 1px solid var(--reactor);
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+
+/* Detail paragraph */
+.detail {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--concrete);
+  line-height: 1.6;
+  max-width: 720px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .section { padding: 56px 20px; }
+  .frame { padding: 24px 20px; }
+  .body { flex-direction: column; }
+}

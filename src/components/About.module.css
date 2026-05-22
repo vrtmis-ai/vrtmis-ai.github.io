@@ -1,0 +1,226 @@
+/* ═══════════════════════════════════════════════
+   ABOUT — Three-act profile: Dossier · Narrative · Timeline.
+   ═══════════════════════════════════════════════ */
+
+.about {
+  padding-top: 140px;
+  padding-bottom: 140px;
+  padding-left: clamp(24px, 5vw, 80px);
+  padding-right: clamp(24px, 5vw, 80px);
+  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+}
+
+/* ── Header ── */
+.header {
+  margin-bottom: 64px;
+}
+
+.sectionTitle {
+  font-size: clamp(3rem, 7vw, 6rem);
+  color: var(--linen);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-top: 16px;
+}
+
+/* ════════════════════════════════════════════════
+   1 / DOSSIER — passport-style 2-column grid.
+   Label stacked above value in each cell. Pairs sit side-by-side
+   so the eye doesn't have to travel across a wide row.
+   ════════════════════════════════════════════════ */
+.dossier {
+  border-top: 1px solid oklch(94% 0.008 30 / 0.12);
+  padding-top: 28px;
+  margin-bottom: 96px;
+}
+
+.dossierTag {
+  display: block;
+  color: var(--reactor);
+  margin-bottom: 28px;
+  letter-spacing: 0.25em;
+}
+
+.dossierList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px clamp(40px, 6vw, 80px);
+  margin: 0;
+}
+
+.dossierRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid oklch(94% 0.008 30 / 0.08);
+}
+
+.dossierLabel {
+  color: var(--reactor);
+  margin: 0;
+  letter-spacing: 0.2em;
+}
+
+.dossierValue {
+  font-family: var(--font-display);
+  color: var(--linen);
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════════
+   2 / NARRATIVE — personal essay
+   ════════════════════════════════════════════════ */
+.narrative {
+  max-width: 760px;
+  margin: 0 auto 120px;
+  border-top: 1px solid oklch(94% 0.008 30 / 0.12);
+  padding-top: 28px;
+}
+
+.narrativeTag {
+  display: block;
+  color: var(--reactor);
+  margin-bottom: 32px;
+  letter-spacing: 0.25em;
+}
+
+/* Lede — opening paragraph, larger */
+.lede {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  color: var(--linen);
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  font-weight: 700;
+  margin-bottom: 36px;
+}
+
+/* Body paragraphs */
+.para {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: var(--bone);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* PULL QUOTE — massive orange centred between paragraphs */
+.pullQuote {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 3.4rem);
+  color: var(--reactor);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  margin: 64px 0;
+  padding: 28px 0;
+  border-top: 1px solid oklch(64% 0.225 36 / 0.4);
+  border-bottom: 1px solid oklch(64% 0.225 36 / 0.4);
+  position: relative;
+  text-align: center;
+}
+
+.pullMark {
+  display: inline-block;
+  font-size: 0.7em;
+  color: oklch(64% 0.225 36 / 0.5);
+  margin: 0 0.15em;
+  vertical-align: -0.1em;
+}
+
+/* ════════════════════════════════════════════════
+   3 / TIMELINE — chronicle of milestones
+   ════════════════════════════════════════════════ */
+.timelineWrap {
+  border-top: 1px solid oklch(94% 0.008 30 / 0.12);
+  padding-top: 28px;
+}
+
+.timelineTag {
+  display: block;
+  color: var(--reactor);
+  margin-bottom: 32px;
+  letter-spacing: 0.25em;
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.milestone {
+  position: relative;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 32px;
+  align-items: baseline;
+  padding: 28px 0;
+  border-bottom: 1px solid oklch(94% 0.008 30 / 0.06);
+  transition: padding-left 0.4s var(--ease-out-expo),
+              border-color 0.4s var(--ease-out-expo);
+}
+
+.milestone:hover {
+  padding-left: 16px;
+  border-bottom-color: var(--reactor);
+}
+
+.milestone:hover .milestoneWhat {
+  color: var(--reactor);
+}
+
+.milestoneYear {
+  color: var(--reactor);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  font-size: 13px;
+}
+
+.milestoneBody {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.milestoneWhat {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.6vw, 20px);
+  font-weight: 700;
+  color: var(--linen);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  transition: color 0.3s var(--ease-out-expo);
+}
+
+.milestoneWhere {
+  color: var(--concrete);
+  font-size: 11px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .about {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .dossierList {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .milestone {
+    grid-template-columns: 70px 1fr;
+    gap: 16px;
+  }
+
+  .pullQuote {
+    text-align: left;
+  }
+}

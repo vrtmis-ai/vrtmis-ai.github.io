@@ -1,0 +1,123 @@
+/* ═══════════════════════════════════════════════
+   PROCESS — Sticky-pin section with scroll-reactive diagram.
+   ═══════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  /* tall enough to give plenty of scroll for the right column AND
+     to drive the diagram's line-drawing animation */
+  min-height: 240vh;
+  padding: 0 clamp(24px, 5vw, 80px);
+  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+}
+
+/* The two-col grid is sticky; left column stays pinned at top */
+.sticky {
+  position: sticky;
+  top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(40px, 6vw, 96px);
+  padding-top: 80px;
+  padding-bottom: 80px;
+  min-height: calc(100vh - 160px);
+}
+
+/* ── LEFT pinned column ── */
+.left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: clamp(40px, 6vw, 88px);
+  color: var(--linen);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  margin-top: 16px;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.titleDot {
+  color: var(--reactor);
+}
+
+.lede {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--concrete);
+  line-height: 1.6;
+  max-width: 380px;
+  margin-bottom: 40px;
+}
+
+/* Scroll-driven diagram fills the rest of the left column */
+.diagram {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1;
+  margin-top: auto;
+}
+
+/* ── RIGHT scrolling column ── */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(40px, 6vh, 80px);
+  padding-top: 16px;
+}
+
+.stage {
+  border-top: 1px solid oklch(94% 0.008 30 / 0.10);
+  padding-top: 28px;
+}
+
+.stageHead {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.stageNum {
+  color: var(--reactor);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.stageName {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 32px);
+  color: var(--linen);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.stageBody {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--bone);
+  line-height: 1.65;
+  max-width: 540px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .section {
+    min-height: auto;
+  }
+  .sticky {
+    position: static;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding-bottom: 64px;
+  }
+  .diagram {
+    max-width: 280px;
+    margin: 32px 0 0 0;
+  }
+}

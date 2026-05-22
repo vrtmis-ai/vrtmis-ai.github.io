@@ -1,0 +1,212 @@
+/* ═══════════════════════════════════════════════
+   FOOTER — Three-row closer: wordmark + clock, link cols, copyright.
+   ═══════════════════════════════════════════════ */
+
+.footer {
+  padding: 120px clamp(24px, 5vw, 80px) 32px;
+  border-top: 1px solid oklch(94% 0.008 30 / 0.10);
+}
+
+/* ════════════════════════════════════════════════
+   ROW 1 — Big "BUILT IN TEHRAN" + live clock
+   ════════════════════════════════════════════════ */
+.row1 {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 64px;
+  align-items: end;
+  padding-bottom: 96px;
+  border-bottom: 1px solid oklch(94% 0.008 30 / 0.08);
+}
+
+.wordmark {
+  font-size: clamp(3.5rem, 11vw, 11rem);
+  color: var(--linen);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+}
+
+.wordmarkAccent {
+  color: var(--reactor);
+}
+
+.clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.clockLabel {
+  color: var(--concrete);
+}
+
+.clockTime {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: var(--linen);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  /* tabular figures keep the colon and digits aligned each minute */
+}
+
+.clockMeta {
+  color: var(--iron);
+  font-size: 11px;
+}
+
+.clockDot {
+  margin-top: 12px;
+  color: var(--reactor);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+}
+
+/* ════════════════════════════════════════════════
+   ROW 2 — Four link columns
+   ════════════════════════════════════════════════ */
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(32px, 4vw, 56px);
+  padding: 72px 0;
+  border-bottom: 1px solid oklch(94% 0.008 30 / 0.08);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.columnTitle {
+  color: var(--reactor);
+  letter-spacing: 0.25em;
+}
+
+.columnLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.columnLinks a,
+.columnLinks button {
+  /* Reset button look */
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: none;
+
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--paper);
+  text-decoration: none;
+  letter-spacing: 0;
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  transition: color 0.3s var(--ease-out-expo),
+              padding-left 0.4s var(--ease-out-expo);
+}
+
+/* Animated arrow that slides in on hover (left side) */
+.columnLinks a::before,
+.columnLinks button::before {
+  content: '→';
+  position: absolute;
+  left: -18px;
+  top: 0;
+  color: var(--reactor);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s var(--ease-out-expo),
+              transform 0.3s var(--ease-out-expo);
+}
+
+.columnLinks a:hover,
+.columnLinks button:hover {
+  color: var(--reactor);
+  padding-left: 22px;
+}
+
+.columnLinks a:hover::before,
+.columnLinks button:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.studioLine {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--concrete);
+}
+
+.backToTop {
+  /* Inherits styles via .columnLinks button rule above */
+  margin-top: 8px;
+  color: var(--reactor);
+}
+
+/* ════════════════════════════════════════════════
+   ROW 3 — Bottom strip (copyright + signature + version)
+   ════════════════════════════════════════════════ */
+.row3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 28px;
+}
+
+.signature {
+  color: var(--concrete);
+}
+
+.sigAccent {
+  color: var(--reactor);
+}
+
+.version {
+  color: var(--iron);
+  font-family: var(--font-mono);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .row2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 80px 20px 32px;
+  }
+
+  .row1 {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-bottom: 64px;
+  }
+
+  .clock {
+    align-items: flex-start;
+  }
+
+  .row2 {
+    padding: 56px 0;
+  }
+
+  .row3 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

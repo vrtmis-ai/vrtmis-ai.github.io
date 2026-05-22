@@ -1,0 +1,39 @@
+/* ═══════════════════════════════════════════════
+   INTRO LOADER — Cinematic first-paint veil.
+   ═══════════════════════════════════════════════ */
+
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;          /* above grain (9999) and cursor (10000) */
+  background: var(--pitch);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo {
+  width: 56px;
+  height: auto;
+  /* Original PNG is orange — keep it orange in the loader */
+}
+
+/* Reactor progress line — sits at the bottom edge, scales x from 0 → 1 */
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--reactor);
+  transform-origin: 0% 50%;
+  box-shadow: 0 0 16px oklch(64% 0.225 36 / 0.5);
+}

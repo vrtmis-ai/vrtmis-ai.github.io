@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-21T00:00:00.000Z",
+  "title": "Design System: Mahbod Tavassoli — Visual Artist & AI Creative",
+  "extensions": {
+    "colorMeta": {
+      "pitch":         { "role": "neutral",  "displayName": "Pitch",         "canonical": "oklch(8% 0.012 30)",   "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "char":          { "role": "neutral",  "displayName": "Char",          "canonical": "oklch(14% 0.013 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "lead":          { "role": "neutral",  "displayName": "Lead",          "canonical": "oklch(20% 0.014 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "iron":          { "role": "neutral",  "displayName": "Iron",          "canonical": "oklch(36% 0.015 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "concrete":      { "role": "neutral",  "displayName": "Concrete",      "canonical": "oklch(54% 0.014 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "bone":          { "role": "neutral",  "displayName": "Bone",          "canonical": "oklch(70% 0.013 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "chalk":         { "role": "neutral",  "displayName": "Chalk",         "canonical": "oklch(85% 0.012 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "paper":         { "role": "neutral",  "displayName": "Paper",         "canonical": "oklch(91% 0.010 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "linen":         { "role": "neutral",  "displayName": "Linen",         "canonical": "oklch(94% 0.008 30)",  "tonalRamp": ["#0c0a09", "#15110f", "#1c1814", "#2c261f", "#4e463c", "#766858", "#a99a87", "#d6cbbb"] },
+      "reactor":       { "role": "primary",  "displayName": "Reactor",       "canonical": "oklch(65% 0.22 30)",   "tonalRamp": ["#3a0e00", "#5c1600", "#801f00", "#a32800", "#cc3100", "#ff3d00", "#ff6e3f", "#ffa07f"] },
+      "reactor-deep":  { "role": "primary",  "displayName": "Reactor Deep",  "canonical": "oklch(55% 0.20 30)",   "tonalRamp": ["#3a0e00", "#5c1600", "#801f00", "#a32800", "#cc3100", "#ff3d00", "#ff6e3f", "#ffa07f"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Hero name. Section titles. Max two per page." },
+      "headline": { "displayName": "Headline", "purpose": "Manifesto statements. Project card titles." },
+      "title":    { "displayName": "Title",    "purpose": "Discipline group names. Brand tiles." },
+      "body":     { "displayName": "Body",     "purpose": "All running text. 65ch line length." },
+      "label":    { "displayName": "Label",    "purpose": "Mono uppercase metadata. Section eyebrows, years, technical credit." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out-expo",  "value": "cubic-bezier(0.16, 1, 0.3, 1)",  "purpose": "Default for state transitions. Type reveals." },
+      { "name": "ease-out-quart", "value": "cubic-bezier(0.25, 1, 0.5, 1)",  "purpose": "Button color shifts. Card hover." },
+      { "name": "ease-in-out",    "value": "cubic-bezier(0.76, 0, 0.24, 1)", "purpose": "Section transitions. Marquee acceleration." }
+    ],
+    "breakpoints": [
+      { "name": "mobile",  "value": "640px" },
+      { "name": "tablet",  "value": "1024px" },
+      { "name": "desktop", "value": "1440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Reactor-fill, hard-edged, mono-uppercase label. Used once per page maximum.",
+      "html": "<button class=\"ds-btn-primary\">GET IN TOUCH →</button>",
+      "css": ".ds-btn-primary { background: #ff3d00; color: #0c0a09; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; padding: 16px 32px; border: none; border-radius: 0; cursor: pointer; transition: background 0.3s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s cubic-bezier(0.25, 1, 0.5, 1); } .ds-btn-primary:hover { background: #cc3100; color: #f4ecdf; } .ds-btn-primary:focus-visible { outline: 2px solid #ff3d00; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Pitch surface with 1px Reactor outline. Default secondary action.",
+      "html": "<button class=\"ds-btn-ghost\">VIEW CASE</button>",
+      "css": ".ds-btn-ghost { background: #0c0a09; color: #f4ecdf; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; padding: 15px 31px; border: 1px solid #ff3d00; border-radius: 0; cursor: pointer; transition: background 0.3s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s cubic-bezier(0.25, 1, 0.5, 1); } .ds-btn-ghost:hover { background: #ff3d00; color: #0c0a09; } .ds-btn-ghost:focus-visible { outline: 2px solid #ff3d00; outline-offset: 2px; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Color-block visual on top, type below. Hard edges. No shadow. No lift on hover.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-visual\"><span class=\"ds-card-num\">01</span></div><div class=\"ds-card-body\"><div class=\"ds-card-meta\"><span>Architectural Mapping</span><span>2024</span></div><h3 class=\"ds-card-title\">Alireza<br>Ghorbani</h3><p class=\"ds-card-desc\">Large-scale architectural video mapping for major live concert.</p><span class=\"ds-card-client\">Live Concert</span></div></article>",
+      "css": ".ds-card { width: 420px; background: #0c0a09; color: #ece3d4; font-family: 'Space Grotesk', sans-serif; cursor: pointer; } .ds-card-visual { background: #ff3d00; height: 280px; position: relative; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s; } .ds-card-num { position: absolute; top: 16px; left: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #0c0a09; font-weight: 600; } .ds-card-body { padding: 24px 0 0; } .ds-card-meta { display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #a99a87; margin-bottom: 12px; } .ds-card-title { font-size: 2.5rem; font-weight: 700; line-height: 0.92; letter-spacing: -0.03em; color: #f4ecdf; margin: 0 0 12px; transition: letter-spacing 0.5s cubic-bezier(0.16, 1, 0.3, 1); } .ds-card-desc { font-weight: 300; font-size: 0.85rem; line-height: 1.5; color: #a99a87; margin: 0 0 8px; } .ds-card-client { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #ff3d00; } .ds-card:hover .ds-card-visual { transform: scale(0.98); filter: brightness(1.05); } .ds-card:hover .ds-card-title { letter-spacing: -0.02em; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Pitch surface, Iron border, no radius. Heavier than browser default.",
+      "html": "<label class=\"ds-input-wrap\"><span class=\"ds-input-label\">EMAIL</span><input class=\"ds-input\" type=\"email\" placeholder=\"hello@\"></label>",
+      "css": ".ds-input-wrap { display: flex; flex-direction: column; gap: 8px; } .ds-input-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #766858; } .ds-input { background: #0c0a09; color: #f4ecdf; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; padding: 14px 18px; border: 1px solid #4e463c; border-radius: 0; transition: border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-width 0.2s; } .ds-input::placeholder { color: #766858; } .ds-input:focus { outline: none; border-color: #ff3d00; border-width: 2px; padding: 13px 17px; }"
+    },
+    {
+      "name": "Label (Mono Eyebrow)",
+      "kind": "custom",
+      "refersTo": "typography.label",
+      "description": "Mono uppercase metadata. Section eyebrows, years, client tags, footer credits.",
+      "html": "<span class=\"ds-label\">→ Selected Work</span>",
+      "css": ".ds-label { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #766858; }"
+    },
+    {
+      "name": "Custom Cursor Label",
+      "kind": "custom",
+      "refersTo": "cursor-label",
+      "description": "96px Reactor disc with Pitch text inside. The cursor IS the affordance.",
+      "html": "<div class=\"ds-cursor\">VIEW</div>",
+      "css": ".ds-cursor { position: relative; width: 96px; height: 96px; border-radius: 50%; background: #ff3d00; color: #0c0a09; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; mix-blend-mode: difference; }"
+    },
+    {
+      "name": "Brand Tile (Collaborations)",
+      "kind": "custom",
+      "refersTo": "brand-tile",
+      "description": "Editorial grid cell for client names. Inverts to Reactor on hover.",
+      "html": "<div class=\"ds-brand\"><span>Mammut</span></div>",
+      "css": ".ds-brand { padding: 32px 24px; border-right: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); background: #0c0a09; cursor: default; transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1); } .ds-brand span { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 600; color: #f4ecdf; transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1); } .ds-brand:hover { background: #ff3d00; } .ds-brand:hover span { color: #0c0a09; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Studio Floor",
+    "overview": "A portfolio that reads as the workshop, not the showroom. The viewer is standing inside the studio at the hour after the work is finished and before it is cleaned up. Concrete underfoot. Cables. Ember of a soldering iron. A printed reference taped to the wall. The site has the temperature of a place where things are actually made, not a brochure printed about them. Built around three commitments: warm-pitch dark (never neutral, never pure), one reactor-orange accent that earns every appearance, and mechanical & weighted component shapes — right-angled, heavy, made of one decisive material per surface.",
+    "keyCharacteristics": [
+      "Warm-pitch dark by default; tinted toward the reactor-orange hue.",
+      "Single accent. The orange occupies <10% of any frame.",
+      "Zero rounded corners. Hard edges only.",
+      "Type does the heaviest lifting; the 3D scene is a peripheral accent.",
+      "Flat surfaces. No shadows. Depth comes from typographic weight and color blocks.",
+      "Generous, irregular whitespace. Same gap everywhere would be a SaaS tell."
+    ],
+    "rules": [
+      { "name": "The One Voice Rule",       "body": "Reactor is used on ≤10% of any rendered frame, measured in pixels not elements. It announces; it never decorates.", "section": "colors" },
+      { "name": "The Tinted Neutral Rule",  "body": "No #000 or #ffffff. Every neutral pulls toward the Reactor hue with chroma 0.005–0.015.",                         "section": "colors" },
+      { "name": "The No-Gradient Rule",     "body": "Color shifts are categorical, not gradient. Gradient anywhere — text, background, button — is the polished-luxury trap.", "section": "colors" },
+      { "name": "The Two-Voice Rule",       "body": "Display and Label may share one composition. Display + Headline + Body + Label is one too many.",                "section": "typography" },
+      { "name": "The Tracking Rule",        "body": "Display tracks negative to feel compact and heavy. Label tracks wide to read as machine-printed signage.",       "section": "typography" },
+      { "name": "The Single Italic Ban",    "body": "No italics anywhere. Emphasis comes from scale, weight, or color shift to Reactor — never slant.",              "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Hover and focus respond with color shift or outline, never with box-shadow.",          "section": "elevation" },
+      { "name": "The No-Glow Rule",         "body": "No bloom, no soft glow, no rgba shadow-with-blur for premium feel. The studio's light is hard.",                  "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Reactor under 10% of any rendered frame. Measured in pixels, not elements.",
+      "Do tint every neutral toward the Reactor hue (chroma 0.005–0.015). Never reach for #000 or #fff.",
+      "Do make components feel mechanical and weighted. Right-angled corners. Heavy padding. No lift on hover.",
+      "Do let the type carry the hero. The 3D monolith is peripheral.",
+      "Do vary spacing rhythm intentionally. Section gaps of 120px, internal gaps of 24-48px, micro detail at 8-16px.",
+      "Do honor prefers-reduced-motion: kill scroll-linked parallax, 3D idle motion, split-text reveals, marquee scrolls.",
+      "Do preserve focus rings. Reactor outline at 2px, offset 2px, always visible."
+    ],
+    "donts": [
+      "Don't introduce a second saturated color. Reactor is alone.",
+      "Don't use gradients — for backgrounds, for text, for buttons, anywhere.",
+      "Don't use border-radius greater than 0. Hard edges only.",
+      "Don't add box-shadow to anything. Surfaces are flat.",
+      "Don't make components float on hover. They are heavy.",
+      "Don't stack identical project cards in a 3-column grid. Cargo / Wix tell.",
+      "Don't caption every project with marketing prose. Name the client, state the medium, state the scale.",
+      "Don't introduce em dashes. Use commas, colons, periods, or parentheses.",
+      "Don't treat the 3D scene as the centerpiece.",
+      "Don't ship a futuristic neon / cyber / glitch decoration.",
+      "Don't use lifestyle photography, serif display headlines, or champagne/gold accents.",
+      "Don't build About / Work / Contact as the literal anatomy."
+    ]
+  }
+}

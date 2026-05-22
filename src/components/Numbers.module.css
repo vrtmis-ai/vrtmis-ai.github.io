@@ -1,0 +1,89 @@
+/* ═══════════════════════════════════════════════
+   NUMBERS — Counter row.
+   ═══════════════════════════════════════════════ */
+
+.section {
+  padding: 100px clamp(24px, 5vw, 80px);
+  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+}
+
+.header {
+  margin-bottom: 56px;
+}
+
+/* Grid of 4 counters */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.cell {
+  padding-right: 32px;
+  border-right: 1px solid oklch(94% 0.008 30 / 0.08);
+}
+
+.cell:last-child {
+  border-right: 0;
+}
+
+/* Number value */
+.value {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 18px;
+}
+
+.number {
+  font-size: clamp(56px, 8vw, 130px);
+  color: var(--linen);
+  line-height: 0.9;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  /* tabular figures so the digits don't jiggle while counting */
+  font-feature-settings: 'tnum' 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.suffix {
+  font-size: clamp(28px, 4vw, 64px);
+  color: var(--reactor);
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+/* Meta row below number */
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 16px;
+  border-top: 1px solid oklch(94% 0.008 30 / 0.08);
+}
+
+.label {
+  color: var(--bone);
+}
+
+.note {
+  color: var(--iron);
+  font-size: 11px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 20px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 0;
+  }
+  .cell {
+    padding-right: 16px;
+  }
+  .cell:nth-child(2) {
+    border-right: 0;
+  }
+}

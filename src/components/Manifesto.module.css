@@ -1,0 +1,55 @@
+/* ═══════════════════════════════════════════════
+   MANIFESTO — Scroll-driven word colour-in.
+   ═══════════════════════════════════════════════ */
+
+.section {
+  padding: 180px clamp(24px, 5vw, 80px) 200px;
+  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+}
+
+.header {
+  margin-bottom: 64px;
+}
+
+/* The big statement — bottom-left aligned, multi-line */
+.statement {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  max-width: 90%;
+}
+
+/* Each word is two layers: dim (always) + bright (fades in via scroll) */
+.wordWrap {
+  position: relative;
+  display: inline-block;
+}
+
+.wordDim {
+  color: var(--iron);
+  /* hold space, render only the dim layer */
+}
+
+.wordBright {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--linen);
+  pointer-events: none;
+}
+
+.wordAccent {
+  color: var(--reactor);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section {
+    padding: 100px 20px 120px;
+  }
+  .statement {
+    font-size: clamp(1.6rem, 8vw, 3rem);
+  }
+}

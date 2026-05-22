@@ -1,0 +1,175 @@
+/* ═══════════════════════════════════════════════
+   NAV — TRUE LIQUID GLASS top bar.
+   No solid background — just heavy backdrop-blur over whatever's underneath.
+   A thin top-edge specular highlight + faint bottom border = glass plate.
+   ═══════════════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 18px clamp(24px, 5vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Heavier blur + saturation boost — content underneath visibly blurs */
+  backdrop-filter: blur(22px) saturate(1.5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  /* Near-zero tint — let the blur do the work, not a dark slab */
+  background: oklch(8% 0.012 30 / 0.22);
+  /* Hairline bottom edge (glass plate boundary) */
+  border-bottom: 0.5px solid oklch(94% 0.008 30 / 0.10);
+  /* Inner top highlight (specular catch where "light" hits the glass)
+     + tiny outer drop shadow (the plate floats over content) */
+  box-shadow:
+    inset 0 0.5px 0 oklch(94% 0.008 30 / 0.06),
+    0 4px 24px oklch(8% 0.012 30 / 0.25);
+}
+
+/* ── Logo: mark + wordmark ── */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--linen);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  transition: color 0.25s var(--ease-out-expo);
+}
+
+.logoMark {
+  height: 22px;
+  width: auto;
+  /* Tint to linen — the source PNG is orange */
+  filter: brightness(0) invert(1) opacity(0.9);
+  transition: filter 0.25s var(--ease-out-expo);
+}
+
+.logo:hover .logoMark {
+  /* Restore the original orange on hover */
+  filter: none;
+  opacity: 1;
+}
+
+.logoText {
+  text-transform: uppercase;
+  display: flex;
+}
+
+.logoAccent {
+  color: var(--reactor);
+  margin: 0 1px;
+}
+
+/* ── Links ── */
+.links {
+  display: flex;
+  gap: clamp(20px, 3vw, 36px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links a {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone);
+  text-decoration: none;
+  transition: color 0.25s var(--ease-out-expo);
+  position: relative;
+  padding: 4px 0;
+}
+
+/* Underline grows from 0 → 100% on hover */
+.links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--reactor);
+  transition: width 0.35s var(--ease-out-expo);
+}
+
+.links a:hover {
+  color: var(--linen);
+}
+
+.links a:hover::after {
+  width: 100%;
+}
+
+/* ── Hamburger ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 4px;
+  background: none;
+  border: none;
+  cursor: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--linen);
+  transition: transform 0.3s var(--ease-out-expo),
+              opacity 0.3s var(--ease-out-expo);
+}
+
+.hamburgerOpen span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburgerOpen span:nth-child(2) { opacity: 0; }
+.hamburgerOpen span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .nav {
+    padding: 14px 20px;
+  }
+
+  .logoText {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: oklch(8% 0.012 30 / 0.96);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 80px 32px;
+    gap: 24px;
+    transform: translateX(100%);
+    transition: transform 0.45s var(--ease-out-expo);
+  }
+
+  .linksOpen {
+    transform: translateX(0);
+  }
+
+  .links a {
+    font-size: 20px;
+    letter-spacing: 0.05em;
+  }
+}

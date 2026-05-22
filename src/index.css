@@ -1,0 +1,312 @@
+/* ═══════════════════════════════════════════════
+   STUDIO FLOOR — Design System Foundation
+   See DESIGN.md. Every value here is documented there.
+   ═══════════════════════════════════════════════ */
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+/* ── Color tokens: tinted neutrals + reactor accent ── */
+:root {
+  /* Pitch / Char / Lead / Iron / Concrete / Bone / Chalk / Paper / Linen */
+  /* All neutrals tint toward Reactor hue (30) at chroma 0.008-0.015 */
+  --pitch: oklch(8% 0.012 30);
+  --char: oklch(14% 0.013 30);
+  --lead: oklch(20% 0.014 30);
+  --iron: oklch(36% 0.015 30);
+  --concrete: oklch(54% 0.014 30);
+  --bone: oklch(70% 0.013 30);
+  --chalk: oklch(85% 0.012 30);
+  --paper: oklch(91% 0.010 30);
+  --linen: oklch(94% 0.008 30);
+
+  /* The single accent — #FF5500 in OKLCH. Used <10% of any frame. */
+  --reactor: oklch(64% 0.225 36);
+  --reactor-deep: oklch(54% 0.205 36);
+  --reactor-dim: oklch(64% 0.225 36 / 0.4);   /* for borders / dim states */
+  --reactor-glow: oklch(64% 0.225 36 / 0.2);  /* for shadow glow */
+
+  /* Typography — Syne for headlines (geometric, confident), DM Sans for body */
+  --font-display: 'Syne', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+  /* Easing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Spacing scale (hair, micro, sm, md, lg, xl, section) */
+  --space-hair: 4px;
+  --space-micro: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 80px;
+  --space-section: 120px;
+}
+
+/* ── Body ── */
+body {
+  font-family: var(--font-body);
+  background: var(--pitch);
+  color: var(--paper);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--reactor);
+  color: var(--pitch);
+}
+
+/* ── Scrollbar, barely there ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--pitch); }
+::-webkit-scrollbar-thumb { background: var(--iron); }
+
+/* ── Root container ── */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ── Typography classes ── */
+/* t-display = Syne 800 — replaces Anton. Crisper at all sizes, no pixelation. */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+.t-heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0;
+  max-width: 65ch;
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--concrete);
+}
+
+.t-label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--concrete);
+}
+
+/* ── Links ── */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s var(--ease-out-quart);
+}
+
+a:hover {
+  color: var(--reactor);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--reactor);
+  outline-offset: 4px;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: none;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--reactor);
+  outline-offset: 4px;
+}
+
+/* ── Grain overlay ── */
+.grain-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  /* Static — the snap-jumps every 0.5s read as flicker on dark backgrounds.
+     A still grain layer keeps the editorial texture without the visual noise. */
+}
+
+/* ── Section base ── */
+section {
+  position: relative;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+/* ── Custom cursor — OS arrow ↔ liquid-glass disc ──
+   IDLE  : Northwest-pointing arrow shape (like Windows / classic OS cursor).
+           Glass material via backdrop-filter clipped to the arrow polygon,
+           with an orange hairline drawn over via SVG path.
+   HOVER : 72px liquid-glass disc, transparent (NOT matte), light refraction
+           visible. Centred on the cursor's hot-point (mouse tip).
+   ───────────────────────────────────────────────── */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 28px;
+  pointer-events: none;
+  z-index: 10000;
+  /* JS positions via translate3d(x, y, 0) — no centering on the .cursor
+     itself; the arrow's tip is at (0,0) so the hot-point is at the mouse. */
+}
+
+/* ── Arrow layers (idle state) ─────────────────────────────── */
+
+/* Arrow glass — backdrop-blur clipped to the OS-cursor polygon shape */
+.cursor-arrow-glass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 28px;
+  background: transparent;
+  /* TRANSPARENT — let content show through. Just enough refraction
+     to read as glass, not enough to be matte/frosted. */
+  backdrop-filter: blur(6px) saturate(1.4);
+  -webkit-backdrop-filter: blur(6px) saturate(1.4);
+  /* Same polygon as the SVG path below — kept in sync */
+  clip-path: polygon(
+    4.16% 3.57%,    /* tip:        ( 1,  1) */
+    4.16% 67.86%,   /* down-left:  ( 1, 19) */
+    29.17% 53.57%,  /* inner:      ( 7, 15) */
+    45.83% 92.86%,  /* tail-left:  (11, 26) */
+    58.33% 89.29%,  /* tail-right: (14, 25) */
+    41.67% 50.00%,  /* tail-meet:  (10, 14) */
+    75.00% 50.00%   /* body-right: (18, 14) */
+  );
+  transition: opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.cursor-arrow-outline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 28px;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px oklch(8% 0.012 30 / 0.4));
+  transition: opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ── Hover disc (hover state) ─────────────────────────────── */
+
+.cursor-disc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  /* Centred on the arrow's hot-point (i.e. mouse position) */
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  pointer-events: none;
+  background: transparent;
+  /* MORE TRANSPARENT than before — softer blur (10px not 20px), lighter
+     saturation, no heavy inner highlights. Glass you can SEE THROUGH. */
+  backdrop-filter: blur(10px) saturate(1.5);
+  -webkit-backdrop-filter: blur(10px) saturate(1.5);
+  border: 0.5px solid oklch(94% 0.008 30 / 0.18);
+  /* Faint top specular highlight only — no dark bottom rim, so it doesn't
+     read as a matte disc */
+  box-shadow:
+    inset 0 0.5px 0 oklch(94% 0.008 30 / 0.18),
+    0 4px 20px oklch(8% 0.012 30 / 0.25);
+  transition:
+    opacity   0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Subtle radial specular highlight to suggest a curved glass surface */
+.cursor-disc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    oklch(94% 0.008 30 / 0.16) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+/* ── State switching ───────────────────────────────────────── */
+.cursor.state-hover .cursor-arrow-glass,
+.cursor.state-hover .cursor-arrow-outline {
+  opacity: 0;
+}
+
+.cursor.state-hover .cursor-disc {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  button, a { cursor: pointer; }
+  .cursor { display: none; }
+}
+
+/* ── Honor reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grain-overlay {
+    animation: none;
+  }
+}
