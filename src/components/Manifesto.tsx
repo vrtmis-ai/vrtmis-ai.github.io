@@ -6,25 +6,25 @@ import styles from './Manifesto.module.css'
  * Manifesto — editorial statement that COLOURS-IN word by word as the user
  * scrolls past it (the gpt-taste "scrubbing text reveal" pattern).
  *
- * Plus, an INLINE typography pill image embedded in the first line — a small
- * urban-feeling pill inside "Made in [image] Tehran." The pill image lives
- * on the text baseline, mid-sentence — premium magazine-editorial move.
+ * Plus, an INLINE typographic pill stamped into the first line — "Made in
+ * [+98] Tehran." The pill is a small mono-typed badge in reactor orange,
+ * sitting on the heading's baseline. +98 is Iran's international dialing
+ * code, so the pill reads as a geographic stamp inside the sentence.
  *
- * Drop a real photo at /public/inline/tehran.jpg to replace the placeholder
- * (currently from picsum.photos so it has SOMETHING on first load).
+ * No image asset needed — pure type.
  */
 
-/** A token in the manifesto: either a word or an inline image */
+/** A token in the manifesto: word, or a small typographic stamp pill */
 type Token =
   | { kind: 'word'; text: string }
-  | { kind: 'image'; src: string; alt: string }
+  | { kind: 'pill'; text: string }
 
-/** The manifesto, line-by-line, where one of the words is replaced by an image */
+/** The manifesto, line-by-line. A pill stands in mid-sentence as a stamp. */
 const LINES: Token[][] = [
   [
     { kind: 'word', text: 'Made' },
     { kind: 'word', text: 'in' },
-    { kind: 'image', src: '/inline/tehran.jpg', alt: 'Tehran skyline' },
+    { kind: 'pill', text: '+98' },
     { kind: 'word', text: 'Tehran.' },
   ],
   [
@@ -78,10 +78,10 @@ export function Manifesto() {
       </div>
       <p className={styles.statement}>
         {FLAT.map((token, i) => {
-          if (token.kind === 'image') {
+          if (token.kind === 'pill') {
             return (
-              <span key={`img-${i}`}>
-                <InlineImage src={token.src} alt={token.alt} />
+              <span key={`pill-${i}`}>
+                <InlinePill>{token.text}</InlinePill>
                 {token.isLastInLine ? <br /> : ' '}
               </span>
             )
@@ -105,16 +105,9 @@ export function Manifesto() {
   )
 }
 
-/** Inline typography pill — a small urban-feeling image on the text baseline */
-function InlineImage({ src, alt }: { src: string; alt: string }) {
-  return (
-    <span
-      className={styles.inlineImg}
-      style={{ backgroundImage: `url(${src})` }}
-      role="img"
-      aria-label={alt}
-    />
-  )
+/** Inline typographic pill — a small mono-typed badge on the heading baseline */
+function InlinePill({ children }: { children: React.ReactNode }) {
+  return <span className={styles.inlinePill}>{children}</span>
 }
 
 function Word({
