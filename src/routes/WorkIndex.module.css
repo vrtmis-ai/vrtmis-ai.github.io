@@ -138,7 +138,9 @@
 
 .visual {
   position: relative;
-  aspect-ratio: 4 / 3;
+  /* Square — matches the 1080×1080 preview clip aspect AND the home-page
+     card visual area. Consistent shape everywhere on the site. */
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   margin-bottom: 16px;
   transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);

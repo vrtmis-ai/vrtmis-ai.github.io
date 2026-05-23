@@ -122,11 +122,12 @@
   transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* Color-block visual — lifted in Z on hover for parallax depth */
+/* Color-block visual — square (1:1) so the 1080×1080 preview videos
+   land pixel-perfect with no letterbox or crop. */
 .visual {
   position: relative;
   width: 100%;
-  height: 60%;
+  aspect-ratio: 1 / 1;
   margin-bottom: 24px;
   overflow: hidden;
   transform: translateZ(0);
