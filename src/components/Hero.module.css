@@ -90,7 +90,7 @@
   flex-shrink: 0;
 }
 
-/* ── Name — massive Syne 800 ── */
+/* ── Name — massive Syne 800. Single H1, two visible lines ── */
 .name {
   font-size: clamp(48px, 9vw, 150px);
   color: var(--linen);
@@ -99,6 +99,11 @@
   font-weight: 800;
   margin: 0;
   position: relative;
+}
+
+/* Each visible line is a styled span (semantic h1 stays single) */
+.nameLine {
+  display: block;
 }
 
 .nameAccent {

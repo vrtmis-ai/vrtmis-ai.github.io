@@ -49,10 +49,14 @@ export function Hero({ scrollProgress }: HeroProps) {
           Visual Artist &amp; AI Creative
         </motion.div>
 
+        {/* Single H1 on the page (the previous two h1s violated SEO + a11y).
+            Visible name is split across two lines; the orange line is a styled
+            span, not a separate heading. */}
         <h1 className={`t-display ${styles.name}`}>
-          <SplitText delay={0.6} stagger={0.045} duration={1.1}>Mahbod</SplitText>
-          <br />
-          <span className={styles.nameAccent}>
+          <span className={styles.nameLine}>
+            <SplitText delay={0.6} stagger={0.045} duration={1.1}>Mahbod</SplitText>
+          </span>
+          <span className={`${styles.nameLine} ${styles.nameAccent}`}>
             <SplitText delay={0.9} stagger={0.045} duration={1.1}>Tavassoli</SplitText>
           </span>
         </h1>
