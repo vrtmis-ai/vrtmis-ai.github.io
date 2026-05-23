@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { SplitText } from './SplitText'
+import { InlinePill } from './InlinePill'
 import styles from './About.module.css'
 
 /**
@@ -132,7 +133,8 @@ export function About() {
           transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className={styles.pullMark}>“</span>
-          I don't fall in love with tools. I fall in love with what they make possible.
+          I don't fall in love with tools. I fall in love with{' '}
+          <InlinePill variant="highlight">what they make possible</InlinePill>.
           <span className={styles.pullMark}>”</span>
         </motion.blockquote>
 

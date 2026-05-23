@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { SplitText } from './SplitText'
 import { CTAButton } from './CTAButton'
+import { InlinePill } from './InlinePill'
 import styles from './Hero.module.css'
 
 interface HeroProps {
@@ -47,6 +48,7 @@ export function Hero({ scrollProgress }: HeroProps) {
         >
           <span className={styles.tagLine} />
           Visual Artist &amp; AI Creative
+          {' '}<InlinePill>no AI hype</InlinePill>
         </motion.div>
 
         {/* Single H1 on the page (the previous two h1s violated SEO + a11y).

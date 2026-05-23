@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { SplitText } from './SplitText'
+import { InlinePill } from './InlinePill'
 import styles from './Disciplines.module.css'
 
 /**
@@ -72,7 +73,8 @@ export function Disciplines() {
           <span className={`t-label ${styles.count}`}>06 / Stacks</span>
         </motion.div>
         <h2 className={`t-display ${styles.sectionTitle}`}>
-          <SplitText trigger="inview" stagger={0.05} duration={0.9}>What I do.</SplitText>
+          <SplitText trigger="inview" stagger={0.05} duration={0.9}>What I do</SplitText>
+          {' '}<InlinePill>on a good day</InlinePill>
         </h2>
       </div>
 
