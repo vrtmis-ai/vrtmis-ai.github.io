@@ -5,7 +5,7 @@
 .section {
   padding-top: 120px;
   padding-bottom: 120px;
-  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+  border-top: 1px solid var(--border-faint);
   /* Skip painting the 15-tile grid when off-screen */
   content-visibility: auto;
   contain-intrinsic-size: 800px;
@@ -30,8 +30,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 0;
-  border-top: 1px solid oklch(94% 0.008 30 / 0.12);
-  border-left: 1px solid oklch(94% 0.008 30 / 0.12);
+  border-top: 1px solid var(--border-soft);
+  border-left: 1px solid var(--border-soft);
 }
 
 .brand {
@@ -39,8 +39,8 @@
   --tilt-y: 0deg;
   --mx: 50%;
   --my: 50%;
-  border-right: 1px solid oklch(94% 0.008 30 / 0.12);
-  border-bottom: 1px solid oklch(94% 0.008 30 / 0.12);
+  border-right: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
   padding: 32px 24px;
   position: relative;
   overflow: hidden;
@@ -78,13 +78,13 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 1px 0 oklch(94% 0.008 30 / 0);
+  box-shadow: inset 0 1px 0 transparent;
   transition: box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1);
   z-index: 2;
 }
 
 .brand:hover::after {
-  box-shadow: inset 0 1px 0 oklch(94% 0.008 30 / 0.18);
+  box-shadow: inset 0 1px 0 var(--border-strong);
 }
 
 .brand:hover {

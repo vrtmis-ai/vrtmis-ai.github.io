@@ -8,7 +8,7 @@
      to drive the diagram's line-drawing animation */
   min-height: 240vh;
   padding: 0 clamp(24px, 5vw, 80px);
-  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+  border-top: 1px solid var(--border-faint);
 }
 
 /* The two-col grid is sticky; left column stays pinned at top */
@@ -70,7 +70,7 @@
 }
 
 .stage {
-  border-top: 1px solid oklch(94% 0.008 30 / 0.10);
+  border-top: 1px solid var(--border-soft);
   padding-top: 28px;
 }
 

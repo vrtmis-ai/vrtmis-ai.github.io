@@ -4,7 +4,7 @@
 
 .section {
   padding: 180px clamp(24px, 5vw, 80px) 200px;
-  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+  border-top: 1px solid var(--border-faint);
 }
 
 .header {

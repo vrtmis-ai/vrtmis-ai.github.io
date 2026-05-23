@@ -61,7 +61,7 @@ export function ProcessDiagram({ scrollProgress, mouse, total }: ProcessDiagramP
       {/* Grid backdrop */}
       <defs>
         <pattern id="processGrid" width="32" height="32" patternUnits="userSpaceOnUse">
-          <path d="M 32 0 L 0 0 0 32" fill="none" stroke="oklch(94% 0.008 30 / 0.07)" strokeWidth="0.5" />
+          <path d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" opacity="0.07" strokeWidth="0.5" />
         </pattern>
       </defs>
       <rect width="320" height="320" fill="url(#processGrid)" />
@@ -73,7 +73,7 @@ export function ProcessDiagram({ scrollProgress, mouse, total }: ProcessDiagramP
         width="318"
         height="318"
         fill="none"
-        stroke="oklch(94% 0.008 30 / 0.12)"
+        stroke="currentColor" opacity="0.12"
         strokeWidth="1"
       />
       {/* Corner ticks */}
@@ -90,7 +90,7 @@ export function ProcessDiagram({ scrollProgress, mouse, total }: ProcessDiagramP
       <path
         d={pathD}
         fill="none"
-        stroke="oklch(94% 0.008 30 / 0.10)"
+        stroke="currentColor" opacity="0.10"
         strokeWidth="1.5"
         strokeDasharray="3 5"
       />
@@ -147,7 +147,7 @@ function Node({
   return (
     <g transform={`translate(${x} ${y})`}>
       {/* Pending state: hollow gray ring */}
-      <circle r="8" fill="none" stroke="oklch(94% 0.008 30 / 0.25)" strokeWidth="1" />
+      <circle r="8" fill="none" stroke="currentColor" opacity="0.25" strokeWidth="1" />
 
       {/* Active state: filled orange dot + outer pulse */}
       <motion.circle r="10" fill="none" stroke="var(--reactor)" strokeWidth="1.5"

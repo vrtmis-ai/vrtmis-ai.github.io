@@ -4,8 +4,8 @@
 
 .marqueeWrap {
   width: 100%;
-  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
-  border-bottom: 1px solid oklch(94% 0.008 30 / 0.07);
+  border-top: 1px solid var(--border-faint);
+  border-bottom: 1px solid var(--border-faint);
 }
 
 .marquee {
@@ -16,7 +16,7 @@
 
 .marqueeAccent {
   background: rgba(255, 61, 0, 0.03);
-  border-top: 1px solid oklch(94% 0.008 30 / 0.04);
+  border-top: 1px solid var(--border-faint);
 }
 
 .track {

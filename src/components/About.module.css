@@ -7,7 +7,7 @@
   padding-bottom: 140px;
   padding-left: clamp(24px, 5vw, 80px);
   padding-right: clamp(24px, 5vw, 80px);
-  border-top: 1px solid oklch(94% 0.008 30 / 0.07);
+  border-top: 1px solid var(--border-faint);
   content-visibility: auto;
   contain-intrinsic-size: 1400px;
 }
@@ -31,7 +31,7 @@
    so the eye doesn't have to travel across a wide row.
    ════════════════════════════════════════════════ */
 .dossier {
-  border-top: 1px solid oklch(94% 0.008 30 / 0.12);
+  border-top: 1px solid var(--border-soft);
   padding-top: 28px;
   margin-bottom: 96px;
 }
@@ -55,7 +55,7 @@
   flex-direction: column;
   gap: 6px;
   padding-bottom: 16px;
-  border-bottom: 1px solid oklch(94% 0.008 30 / 0.08);
+  border-bottom: 1px solid var(--border-faint);
 }
 
 .dossierLabel {
@@ -80,7 +80,7 @@
 .narrative {
   max-width: 760px;
   margin: 0 auto 120px;
-  border-top: 1px solid oklch(94% 0.008 30 / 0.12);
+  border-top: 1px solid var(--border-soft);
   padding-top: 28px;
 }
 
@@ -139,7 +139,7 @@
    3 / TIMELINE — chronicle of milestones
    ════════════════════════════════════════════════ */
 .timelineWrap {
-  border-top: 1px solid oklch(94% 0.008 30 / 0.12);
+  border-top: 1px solid var(--border-soft);
   padding-top: 28px;
 }
 
@@ -163,7 +163,7 @@
   gap: 32px;
   align-items: baseline;
   padding: 28px 0;
-  border-bottom: 1px solid oklch(94% 0.008 30 / 0.06);
+  border-bottom: 1px solid var(--border-faint);
   transition: padding-left 0.4s var(--ease-out-expo),
               border-color 0.4s var(--ease-out-expo);
 }

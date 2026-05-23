@@ -21,11 +21,11 @@
   /* near-transparent surface so backdrop-blur reads through; auto-flips */
   background: var(--wash-soft);
   /* Hairline bottom edge (glass plate boundary) */
-  border-bottom: 0.5px solid oklch(94% 0.008 30 / 0.10);
+  border-bottom: 0.5px solid var(--border-soft);
   /* Inner top highlight (specular catch where "light" hits the glass)
      + tiny outer drop shadow (the plate floats over content) */
   box-shadow:
-    inset 0 0.5px 0 oklch(94% 0.008 30 / 0.06),
+    inset 0 0.5px 0 var(--border-faint),
     0 4px 24px oklch(8% 0.012 30 / 0.25);
 }
 
