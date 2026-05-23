@@ -44,38 +44,29 @@
   color: var(--reactor);
 }
 
-/* ── Inline typographic pill — mono-typed reactor stamp on the heading baseline ──
-   Sizes in `em` so it scales with the heading font.  Mono text, hairline
-   reactor border, subtle reactor-tint background, fixed line-height so it
-   sits cleanly on the baseline of the big Syne display type next to it. */
-.inlinePill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 0.62em;
-  padding: 0 0.45em;
+/* ── Inline typography pill — image on the text baseline ────────
+   Width is in `em` units so it scales with the heading font size.
+   If the image at the given src fails to load, the iron-colored
+   background underneath shows through as a graceful fallback. */
+.inlineImg {
+  display: inline-block;
+  width: 2em;
+  height: 0.7em;
   border-radius: 999px;
-  background: oklch(64% 0.225 36 / 0.10);
-  border: 0.5px solid oklch(64% 0.225 36 / 0.55);
-  color: var(--reactor);
-  font-family: var(--font-mono);
-  font-size: 0.32em;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  vertical-align: 0.18em;
+  background-color: var(--iron);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  vertical-align: -0.04em;
   margin: 0 0.18em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  /* Subtle inner edge for the "stamped" feel */
+  /* Subtle inner highlight makes it read like a glass pill */
   box-shadow:
-    inset 0 0.5px 0 oklch(94% 0.008 30 / 0.10);
-  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
-              background 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    inset 0 0.5px 0 oklch(94% 0.008 30 / 0.25),
+    inset 0 -0.5px 0 oklch(8% 0.012 30 / 0.35);
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.inlinePill:hover {
-  background: oklch(64% 0.225 36 / 0.22);
+.inlineImg:hover {
   transform: scale(1.08);
 }
 
