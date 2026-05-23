@@ -88,7 +88,8 @@
 }
 
 .brand:hover {
-  background: oklch(12% 0.014 30);
+  /* Lifted surface — flips with theme via --lead token */
+  background: var(--lead);
 }
 
 .brand:hover .brandName {
@@ -109,7 +110,7 @@
 
 /* "+ many more" tile — quieter, reactor-tinted */
 .brandMore {
-  background: oklch(11% 0.012 30);
+  background: var(--char);
 }
 
 .brandMore .brandName {
@@ -119,7 +120,7 @@
 }
 
 .brandMore:hover {
-  background: oklch(8% 0.012 30);
+  background: var(--pitch);
 }
 
 .brandMore:hover .brandName {

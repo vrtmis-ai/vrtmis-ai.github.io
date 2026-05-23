@@ -14,8 +14,14 @@ interface SplitTextProps {
 
 /**
  * Per-character / per-word animated text reveal.
- * Each unit slides up from below with a stagger.
- * Foundation animation primitive — used everywhere typography reveals.
+ *
+ * For `by='char'` we wrap characters in a per-word `inline-block` group so
+ * the browser can't break a word in the middle (the old behaviour: every
+ * char was its own inline-block, which let "Ghorbani" wrap as "Ghorban|i").
+ * Words can still wrap to a new line — only the chars inside a word are
+ * forced to stay together.
+ *
+ * For `by='word'` each word is its own animated unit (no per-char reveal).
  */
 export function SplitText({
   children,
@@ -28,11 +34,6 @@ export function SplitText({
 }: SplitTextProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10%' })
-
-  const units = by === 'word'
-    ? children.split(/(\s+)/)
-    : Array.from(children)
-
   const shouldAnimate = trigger === 'mount' || isInView
 
   const container: Variants = {
@@ -46,19 +47,21 @@ export function SplitText({
   }
 
   const child: Variants = {
-    hidden: {
-      y: '110%',
-      opacity: 0,
-    },
+    hidden: { y: '110%', opacity: 0 },
     visible: {
       y: '0%',
       opacity: 1,
-      transition: {
-        duration,
-        ease: [0.16, 1, 0.3, 1],
-      },
+      transition: { duration, ease: [0.16, 1, 0.3, 1] },
     },
   }
+
+  // Tokenise: split on whitespace, keep the spaces. Each token is either a
+  // word (any run of non-whitespace) or a whitespace run.
+  const tokens = children.split(/(\s+)/)
+
+  // Global per-char index so the stagger flows continuously across the whole
+  // string (not restarting at each word boundary)
+  let charIndex = 0
 
   return (
     <motion.span
@@ -68,26 +71,59 @@ export function SplitText({
       initial="hidden"
       animate={shouldAnimate ? 'visible' : 'hidden'}
       aria-label={children}
-      style={{ display: 'inline-block', overflow: 'hidden' }}
+      style={{ display: 'inline' }}
     >
-      {units.map((unit, i) => (
-        <span
-          key={`${unit}-${i}`}
-          aria-hidden
-          style={{
-            display: 'inline-block',
-            overflow: 'hidden',
-            whiteSpace: unit === ' ' ? 'pre' : 'normal',
-          }}
-        >
-          <motion.span
-            variants={child}
-            style={{ display: 'inline-block' }}
+      {tokens.map((token, tokenIdx) => {
+        // Whitespace token — render as a literal space so words can wrap here
+        if (/^\s+$/.test(token)) {
+          return (
+            <span key={`ws-${tokenIdx}`} aria-hidden>{token}</span>
+          )
+        }
+
+        // by='word' — animate the whole word as one unit
+        if (by === 'word') {
+          return (
+            <span
+              key={`w-${tokenIdx}`}
+              aria-hidden
+              style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}
+            >
+              <motion.span variants={child} style={{ display: 'inline-block' }}>
+                {token}
+              </motion.span>
+            </span>
+          )
+        }
+
+        // by='char' — each char animates individually, but they live inside a
+        // word-level inline-block with whiteSpace:nowrap so the WORD never breaks.
+        return (
+          <span
+            key={`w-${tokenIdx}`}
+            aria-hidden
+            style={{
+              display: 'inline-block',
+              whiteSpace: 'nowrap',
+              verticalAlign: 'bottom',
+            }}
           >
-            {unit === ' ' ? ' ' : unit}
-          </motion.span>
-        </span>
-      ))}
+            {Array.from(token).map((ch, chIdxInWord) => {
+              const idx = charIndex++
+              return (
+                <span
+                  key={`c-${idx}-${chIdxInWord}`}
+                  style={{ display: 'inline-block', overflow: 'hidden' }}
+                >
+                  <motion.span variants={child} style={{ display: 'inline-block' }}>
+                    {ch}
+                  </motion.span>
+                </span>
+              )
+            })}
+          </span>
+        )
+      })}
     </motion.span>
   )
 }

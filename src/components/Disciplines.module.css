@@ -108,7 +108,7 @@
 }
 
 .card:hover {
-  background: oklch(11% 0.012 30);
+  background: var(--char);
 }
 
 .card:hover .cardName {

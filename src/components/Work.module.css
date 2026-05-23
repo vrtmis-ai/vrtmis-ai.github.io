@@ -246,8 +246,8 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-  background: oklch(11% 0.012 30);
-  border: 1px solid oklch(94% 0.008 30 / 0.06);
+  background: var(--char);
+  border: 1px solid var(--border-faint);
 }
 
 /* Fallback diagonal-stripes block — always under the media, visible only
@@ -263,7 +263,7 @@
     transparent 1px,
     transparent 28px
   );
-  background-color: oklch(11% 0.012 30);
+  background-color: var(--char);
   background-blend-mode: overlay;
   opacity: 0.5;
   display: flex;
