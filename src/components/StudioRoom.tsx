@@ -123,6 +123,15 @@ export function StudioRoom() {
   // POSITION follows the cursor through a ref + rAF DOM write (NOT state), so
   // moving across the wall never re-renders this heavy video tree.
   const [hovered, setHovered] = useState<Project | null>(null)
+  // Touch devices have no hover: the wall switches to tap-to-light then
+  // tap-again-to-open, and the cursor-following info card is suppressed. Read
+  // once at init (it never changes for a session) — no setState-in-effect.
+  const [isTouch] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(hover: none)').matches,
+  )
+  const armedSlugRef = useRef<string | null>(null)
   const infoCardRef = useRef<HTMLElement>(null)
   const pointer = useRef({ x: 0, y: 0 })
   const moveRaf = useRef(0)
@@ -374,6 +383,25 @@ export function StudioRoom() {
     for (const url of Object.values(TV_VIDEOS)) fetch(url).catch(() => {})
   }, [wallVisible])
 
+  // Light a CRT: aim the single alpha overlay at the slug's clip and run the
+  // channel-on flicker. Shared by hover (desktop) and tap (touch).
+  const lightTV = useCallback((slug: string) => {
+    const v = tvVidRef.current
+    if (!v) return
+    const src = TV_VIDEOS[slug]
+    if (src) {
+      if (v.getAttribute('src') !== src) v.src = src
+      v.classList.remove(styles.tvOn)
+      void v.offsetWidth // restart the tune-in flicker
+      v.classList.add(styles.tvOn)
+      v.currentTime = 0
+      void v.play().catch(() => {})
+    } else {
+      v.classList.remove(styles.tvOn)
+      v.pause()
+    }
+  }, [])
+
   return (
     <section className={styles.section} id="studio" aria-label="Studio · selected work">
       <div ref={containerRef} className={styles.scrollRange}>
@@ -471,25 +499,23 @@ export function StudioRoom() {
                       viewTransitionName: `work-${spot.slug}`,
                     }}
                     aria-label={`Open ${p.caseStudyTitle}`}
+                    onClick={e => {
+                      // Touch: first tap lights + arms the CRT, a second tap on
+                      // the SAME screen opens it. preventDefault stops
+                      // TransitionLink from navigating on the first tap.
+                      if (!isTouch) return
+                      if (armedSlugRef.current === spot.slug) return
+                      e.preventDefault()
+                      armedSlugRef.current = spot.slug
+                      lightTV(spot.slug)
+                    }}
                     onMouseEnter={() => {
+                      if (isTouch) return // touch lights via tap
                       setHovered(p)
-                      const src = TV_VIDEOS[spot.slug]
-                      const v = tvVidRef.current
-                      if (!v) return
-                      if (src) {
-                        if (v.getAttribute('src') !== src) v.src = src
-                        v.classList.remove(styles.tvOn)
-                        void v.offsetWidth // restart the tune-in flicker
-                        v.classList.add(styles.tvOn)
-                        v.currentTime = 0
-                        void v.play().catch(() => {})
-                      } else {
-                        // This TV has no clip yet — clear any lingering channel.
-                        v.classList.remove(styles.tvOn)
-                        v.pause()
-                      }
+                      lightTV(spot.slug)
                     }}
                     onMouseLeave={() => {
+                      if (isTouch) return // touch keeps the channel on
                       setHovered(h => (h?.slug === p.slug ? null : h))
                       const v = tvVidRef.current
                       if (v && TV_VIDEOS[spot.slug]) {
@@ -504,7 +530,7 @@ export function StudioRoom() {
 
             <div className={styles.wallLabel}>
               <span className="t-label">Selected Work</span>
-              <span className={`t-mono ${styles.wallHint}`}>hover a screen ↗</span>
+              <span className={`t-mono ${styles.wallHint}`}>{isTouch ? 'tap a screen ↗' : 'hover a screen ↗'}</span>
             </div>
           </motion.div>
 
@@ -592,7 +618,7 @@ export function StudioRoom() {
       {/* Game-style info card that tracks the cursor over the TV wall. Position
           is written directly to this node (see positionCard) — no per-move
           state — and it fades in via CSS. */}
-      {hovered ? (
+      {!isTouch && hovered ? (
         <aside ref={infoCardRef} className={styles.infoCard}>
           <span className={`t-mono ${styles.infoMeta}`}>
             {hovered.category} · {hovered.year}
