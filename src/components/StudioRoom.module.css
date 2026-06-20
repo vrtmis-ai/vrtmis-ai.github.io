@@ -335,18 +335,33 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   /* The scrubbed camera-turn is a landscape, pointer-driven idea. On a portrait
-     phone we drop the pin and just STACK the room and the wall vertically, each
-     shown whole; the transition video is hidden (no scroll-scrub on touch). */
+     phone we drop the pin and STACK the room (hero) above the wall, each shown
+     whole; the transition video is hidden (no scroll-scrub on touch). */
+
+  /* Full-bleed: cancel the global <section> gutter so scenes go edge-to-edge. */
+  .section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .scrollRange {
     height: auto;
   }
 
+  /* Static flex column so we can ORDER the room (hero) before the wall — the
+     wall is first in the DOM (it fades in last on desktop), so on mobile that
+     order is reversed below, otherwise the tiny wall strip lands up top. */
   .sticky {
     position: static;
     height: auto;
     overflow: visible;
     background: none;
+    display: flex;
+    flex-direction: column;
   }
+
+  .roomLayer { order: 1; }
+  .wallLayer { order: 2; }
 
   /* No scrubbed transition on mobile */
   .transitionVid {
@@ -364,9 +379,9 @@
     pointer-events: auto !important;
   }
 
-  /* The room is the opening — real height so the title has room to breathe. */
+  /* The room is the opening hero — real height so the title can breathe. */
   .roomLayer {
-    min-height: 86svh;
+    min-height: 88svh;
   }
 
   /* The wall shown whole at its native 16:9 so the hotspots still line up. */
@@ -374,23 +389,24 @@
     aspect-ratio: 2752 / 1536;
   }
 
-  /* The hero title overlays the room (the first stacked layer, 86svh tall). */
+  /* The hero title overlays the room (now the first/top block). */
   .heroLayer {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: auto;
-    height: 86svh;
+    height: 88svh;
     opacity: 1 !important;
   }
 
-  /* The wall-label fade is scroll-driven; pin it visible without the scrub. */
-  .wallLabel {
-    opacity: 1 !important;
-  }
-
+  /* heroVisible is gated on the desktop intro/veil flow, which never runs on
+     touch — so pin the title visible + tappable instead of leaving it opacity 0
+     (which is why the title was invisible on phones). */
   .hero {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
     gap: 12px;
     padding: 0 20px;
   }
@@ -400,7 +416,9 @@
     font-size: clamp(40px, 12.5vw, 76px);
   }
 
+  /* The wall-label fade is scroll-driven; pin it visible without the scrub. */
   .wallLabel {
+    opacity: 1 !important;
     left: 20px;
     top: 16px;
   }
@@ -413,5 +431,12 @@
   /* This hint describes the desktop scroll-turn that doesn't exist on mobile. */
   .wallHint {
     display: none;
+  }
+
+  /* The full-bleed scenes dropped the section gutter; re-inset the archive row
+     so its link + divider don't touch the screen edge. */
+  .archiveRow {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
