@@ -5,37 +5,40 @@ session. The codebase is the source of truth; verify anything here against it._
 
 ## Status
 
-Functionally **deploy-ready**: `npm run build` is green, no console errors on a
-fresh load, all routes render, assets resolve. Nothing is committed yet (see
-Pending). Dev server: `npm run dev` → `localhost:5173`.
+**Live in production:** https://vrtmis-ai.github.io/ — deployed to GitHub Pages
+via GitHub Actions. `npm run build` is green, no console errors on a fresh load,
+all routes render, assets resolve. **Every push to `main` auto-rebuilds and
+redeploys** (~1–2 min). Dev server: `npm run dev` → `localhost:5173`.
 
-## ⏳ Pending (do these next)
+## ✅ Done — shipped 2026-06-20
 
-1. **Git commit + push — THE immediate next task.** The user is creating an
-   **empty, public** GitHub repo:
-   **`https://github.com/vrtmis-ai/portfolio-vrtmis`** (no README/.gitignore/
-   license — so the local repo pushes clean). Once it exists:
-   - `git remote add origin https://github.com/vrtmis-ai/portfolio-vrtmis.git`
-   - rename the branch: local is on **`master`**, push as **`main`**
-     (`git branch -M main`).
-   - `git add -A` then one clean commit, then `git push -u origin main`.
-   - `.gitignore` already excludes the heavy clutter (`source-media/` ~1.7 GB,
-     `blender/`, `*.zip`, `teaser.*`, `record-teaser.mjs`, `.claude/`, `.agents/`).
-     The ~180 MB of web video under `public/work/` **does** ship (see Hosting).
-   - **Auth:** `gh` is NOT installed; push runs from the user's machine. If it
-     prompts, GitHub needs a **Personal Access Token** (not a password) over
-     HTTPS, or SSH. Walk the user through a PAT if it asks.
-2. **Hosting / media — free, no budget.** The user has no funds for a CDN right
-   now, so **videos stay in the repo** (the current ~30 s compressed versions)
-   and the site deploys on a **free host** — **GitHub Pages** is the pick (the
-   repo is public, no card, already on GitHub). Note Pages needs an SPA fallback
-   (`404.html` ≈ `index.html`) for client-side routes; `build:static` prerenders
-   the known routes. **Later, when there's budget:** move the heavy
-   `public/work/*/video.mp4` to **Liara Object Storage** (Rial, S3-compatible) or
-   Cloudflare R2 — add an optional `videoUrl` field to `projects.ts` and make
-   `CaseStudy` use `project.videoUrl ?? '/work/<slug>/video.mp4'`; one line per
-   video, no rework. (`source-media/` masters stay local + backed up; never
-   committed.)
+- **Pushed + deployed.** Repo renamed to **`vrtmis-ai/vrtmis-ai.github.io`** so the
+  site serves at the **root** (required — asset paths in code are root-absolute
+  `/work/...`, `/room/...`, `/about-notebook.glb`; a subpath would 404 them).
+  Deploy is **GitHub Pages via GitHub Actions** (`.github/workflows/deploy.yml`):
+  runs `npm run build:static` (prerender → real 200 HTML + per-page OG for all 14
+  routes), writes `404.html` as the SPA fallback, then publishes. Pages source must
+  be **build_type=workflow** (the `*.github.io` repo auto-enables *legacy* branch
+  mode; first deploy failed until switched via `PUT /repos/.../pages
+  {"build_type":"workflow"}`).
+- **Push auth gotcha.** Git Credential Manager on this machine holds the user's
+  **brother's** account (`farboudtavasoli-beep`, no push rights) → plain `git push`
+  404s. Push as `vrtmis-ai` with a classic PAT scoped **`repo` + `workflow`**, used
+  inline + unstored:
+  `git -c credential.helper= push "https://vrtmis-ai:<TOKEN>@github.com/vrtmis-ai/vrtmis-ai.github.io.git" main:main`.
+  History is ~300 MB so a single push 408s on this connection — push
+  **commit-by-commit** to resume safely. `http.postBuffer`/`http.lowSpeedLimit` set
+  repo-local. Fetches need no auth (repo is public).
+
+## ⏳ Later (not blocking)
+
+- **Media → object storage when there's budget.** Videos currently ship in the repo
+  (~188 MB) and serve from Pages. When funds exist, move heavy
+  `public/work/*/video.mp4` to **Liara Object Storage** (Rial, S3-compatible) or
+  Cloudflare R2 — add an optional `videoUrl` field to `projects.ts` and make
+  `CaseStudy` use `project.videoUrl ?? '/work/<slug>/video.mp4'`; one line per
+  video, no rework. (`source-media/` masters stay local + backed up; never
+  committed.)
 ## Notes (not blocking)
 
 - **TV wall is complete** — all 7 screens (green-pay, oliver-twist,
