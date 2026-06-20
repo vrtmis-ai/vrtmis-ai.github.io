@@ -564,8 +564,8 @@ a:hover .arrow {
   opacity: 0;
   pointer-events: none;
   background: var(--wash-soft);
-  backdrop-filter: blur(16px) saturate(1.1);
   -webkit-backdrop-filter: blur(16px) saturate(1.1);
+  backdrop-filter: blur(16px) saturate(1.1);
   border: 1px solid var(--border-faint);
   transition: opacity 0.5s var(--ease-out-expo);
 }

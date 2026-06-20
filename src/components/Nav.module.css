@@ -18,8 +18,8 @@
   align-items: center;
   justify-content: space-between;
   /* Heavier blur + saturation boost — content underneath visibly blurs */
-  backdrop-filter: blur(22px) saturate(1.5);
   -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  backdrop-filter: blur(22px) saturate(1.5);
   /* Near-zero tint — let the blur do the work, not a dark slab */
   /* near-transparent surface so backdrop-blur reads through; auto-flips */
   background: var(--wash-soft);
