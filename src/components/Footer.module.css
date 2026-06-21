@@ -223,6 +223,10 @@
   }
 
   .row2 {
+    /* Single column on phones so the CONTACT column gets the full width — the
+       long email then sits on one line instead of breaking mid-word. */
+    grid-template-columns: 1fr;
+    gap: 32px;
     padding: 56px 0;
   }
 

@@ -315,6 +315,13 @@ a:hover .arrow {
     gap: 20px;
   }
 
+  /* The email is one long unbreakable string — shrink it so it sits on a single
+     line on phones, with anywhere-wrap as a safety net on the very narrowest. */
+  .email {
+    font-size: 0.9rem;
+    overflow-wrap: anywhere;
+  }
+
   .cardShell {
     margin-top: 0;
   }
