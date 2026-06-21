@@ -25,7 +25,7 @@
      the row1 grid, shoving the 1fr clock column off the right edge and causing
      page-wide horizontal scroll everywhere from ~769px up to ~1650px. 8.5vw
      keeps the headline large but lets the clock share the row at every width. */
-  font-size: clamp(3.5rem, 8.5vw, 9rem);
+  font-size: clamp(2.25rem, 8.5vw, 9rem);
   color: var(--linen);
   line-height: 0.88;
   letter-spacing: -0.045em;

@@ -51,7 +51,7 @@
 }
 
 .cta {
-  font-size: clamp(2.2rem, 4.5vw, 4.5rem);
+  font-size: clamp(1.8rem, 4.5vw, 4.5rem);
   color: var(--linen);
   line-height: 0.94;
   letter-spacing: -0.04em;

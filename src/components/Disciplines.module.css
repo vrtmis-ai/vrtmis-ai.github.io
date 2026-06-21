@@ -27,7 +27,7 @@
 }
 
 .sectionTitle {
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: clamp(2rem, 7vw, 6rem);
   color: var(--linen);
   line-height: 0.95;
   letter-spacing: -0.03em;

@@ -45,7 +45,7 @@
 }
 
 .title {
-  font-size: clamp(2.5rem, 7vw, 6.5rem);
+  font-size: clamp(1.9rem, 7vw, 6.5rem);
   color: var(--linen);
   letter-spacing: -0.035em;
   line-height: 0.95;
@@ -251,7 +251,7 @@
 }
 
 .closingHead {
-  font-size: clamp(2.5rem, 7vw, 6rem);
+  font-size: clamp(1.9rem, 7vw, 6rem);
   color: var(--linen);
   letter-spacing: -0.035em;
   line-height: 0.95;
@@ -270,7 +270,7 @@
 }
 
 .notFoundTitle {
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2rem, 8vw, 6rem);
   color: var(--linen);
 }
 

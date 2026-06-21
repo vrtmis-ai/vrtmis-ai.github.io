@@ -46,7 +46,7 @@
 }
 
 .title {
-  font-size: clamp(3rem, 9vw, 8rem);
+  font-size: clamp(2rem, 9vw, 8rem);
   color: var(--linen);
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -225,7 +225,7 @@
   right: 16px;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(80px, 12vw, 140px);
+  font-size: clamp(40px, 12vw, 140px);
   line-height: 1;
   color: var(--lead);
   user-select: none;
@@ -310,7 +310,7 @@
 }
 
 .closingText {
-  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-size: clamp(1.5rem, 5vw, 4.5rem);
   color: var(--linen);
   line-height: 1;
   letter-spacing: -0.03em;
