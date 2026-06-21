@@ -242,6 +242,15 @@ section {
   padding: 0 clamp(24px, 5vw, 80px);
 }
 
+/* Scroll fully frozen while StudioRoom plays its locked camera-turn. On touch,
+   wheel/touchmove preventDefault alone is leaky, so this kills panning outright
+   (touch-action) — the page can't move until the turn lands on the wall. */
+html.studio-locked,
+html.studio-locked body {
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
 /* ── Custom cursor — OS arrow ↔ liquid-glass disc ──
    IDLE  : Northwest-pointing arrow shape (like Windows / classic OS cursor).
            Glass material via backdrop-filter clipped to the arrow polygon,

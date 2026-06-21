@@ -341,16 +341,22 @@
    pan stays visible and the % hotspots land exactly on the CRTs (taps work).
    The hero stays a full-screen overlay so the title isn't clipped to the band. */
 @media (max-width: 768px) {
-  /* The room hero stays full-screen cover (immersive title, like desktop). The
-     turn + wall become a centred 16:9 band so the whole wall shows and the %
-     hotspots land on the CRTs. */
-  .transitionVid,
+  /* Everything stays full-screen cover on mobile (consistent — like desktop).
+     The catch: the wall's % hotspots must follow the cover-crop or taps miss the
+     CRTs. So the WALL LAYER itself becomes the cover frame — a full-height,
+     wall-aspect box that overflows the viewport width (clipped by the sticky's
+     overflow:hidden). Its video AND its hotspots both live in this frame, so the
+     tap targets stay locked to the screens at any aspect. Room + transition use
+     plain object-fit:cover (no tap targets to align). */
   .wallLayer {
-    top: 50%;
+    top: 0;
     bottom: auto;
-    height: auto;
+    left: 50%;
+    right: auto;
+    width: auto;
+    height: 100%;
     aspect-ratio: 2752 / 1536;
-    transform: translateY(-50%);
+    transform: translateX(-50%);
   }
 
   .heroName {

@@ -170,6 +170,9 @@ export function StudioRoom() {
   // ── Scroll lock ──
   const lockScroll = useCallback(() => {
     getActiveLenis()?.stop()
+    // touch-action:none on <html> is what actually freezes a phone — wheel /
+    // touchmove preventDefault is leaky on iOS momentum scrolling.
+    document.documentElement.classList.add('studio-locked')
     window.addEventListener('wheel', blockWheelTouch, { passive: false, capture: true })
     window.addEventListener('touchmove', blockWheelTouch, { passive: false, capture: true })
     window.addEventListener('keydown', blockScrollKeys, { capture: true })
@@ -185,6 +188,7 @@ export function StudioRoom() {
     // current position leaves them right where the turn landed (top of wall),
     // a hair from the reverse trigger.
     if (lenis) lenis.scrollTo(window.scrollY, { immediate: true })
+    document.documentElement.classList.remove('studio-locked')
     window.removeEventListener('wheel', blockWheelTouch, { capture: true })
     window.removeEventListener('touchmove', blockWheelTouch, { capture: true })
     window.removeEventListener('keydown', blockScrollKeys, { capture: true })
@@ -291,7 +295,9 @@ export function StudioRoom() {
     }
     if (phaseRef.current === 'room' && heroReadyRef.current && v > TURN_TRIGGER) {
       startTurn()
-    } else if (phaseRef.current === 'wall' && v < ROOM_RESET) {
+    } else if (!isTouch && phaseRef.current === 'wall' && v < ROOM_RESET) {
+      // On touch we don't replay the reverse turn — once at the wall, scrolling
+      // is free (the "reverse-on-scroll-up" fought the user's finger).
       startReverse()
     }
   })
