@@ -7,6 +7,7 @@ import { IntroLoader } from './components/IntroLoader'
 // import { ScrollChapters } from './components/ScrollChapters'  // removed — will be replaced with scroll-driven video
 // import { Process } from './components/Process'               // removed — user feedback: redundant with About
 import { StudioRoom } from './components/StudioRoom'
+import { MobileStudio } from './components/MobileStudio'
 import { Disciplines } from './components/Disciplines'
 import { About } from './components/About'
 import { Collaborations } from './components/Collaborations'
@@ -15,6 +16,7 @@ import { Footer } from './components/Footer'
 import { BackToTop } from './components/BackToTop'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
 import { useMouseInteraction } from './hooks/useMouseInteraction'
+import { useIsMobile } from './hooks/useIsMobile'
 
 /**
  * Page composition — Studio Floor narrative order.
@@ -36,6 +38,8 @@ function App() {
   // Single hook drives the custom cursor (+ parallax mouse position for future scroll-video).
   // One global mousemove listener (passive).
   const { cursorRef, state } = useMouseInteraction()
+  // Phones get a dedicated touch home instead of the pointer-driven StudioRoom.
+  const isMobile = useIsMobile()
 
   /**
    * Hash-aware scrolling.
@@ -138,9 +142,9 @@ function App() {
         {/* #top anchor for the footer / back-to-top links (the Hero used to
             own this id; the studio room is now the opening). */}
         <span id="top" aria-hidden />
-        {/* StudioRoom is now the opening: the title sits on the lit room,
-            then the scroll turns the camera to the TV-wall gallery. */}
-        <StudioRoom />
+        {/* StudioRoom is the desktop opening (scroll-turn into the TV wall);
+            phones get MobileStudio (a touch hero + tappable work grid). */}
+        {isMobile ? <MobileStudio /> : <StudioRoom />}
         <Disciplines />
         <Collaborations />
         <NowPlaying />
