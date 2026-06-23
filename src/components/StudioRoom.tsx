@@ -211,25 +211,46 @@ export function StudioRoom() {
     lockScroll()
     const v = transRef.current
     if (v) {
+      // It ships preload="none" (fast first paint), so an early scroll can hit
+      // this before the clip is buffered. Make sure it's loading, then play —
+      // and if it isn't ready yet, WAIT for it (the room poster stays under the
+      // lock) instead of cutting to the wall. Only a genuine autoplay block
+      // (ready but rejected) skips ahead.
+      if (v.preload !== 'auto') {
+        v.preload = 'auto'
+        v.load()
+      }
       v.currentTime = 0
-      // If playback is blocked (autoplay off), don't hold the lock for the full
-      // clip staring at a frozen frame — cut straight to the wall instead.
-      v.play().catch(() => finishTurn())
+      const attempt = () => {
+        v.play()
+          .then(() => {
+            // Playing — arm the safety timer from the real (now-known) length.
+            window.clearTimeout(endFallback.current)
+            endFallback.current = window.setTimeout(
+              finishTurn,
+              (v.duration || transDur.current || 6) * 1000 + 1000,
+            )
+          })
+          .catch(() => {
+            if (v.readyState < 3) {
+              v.addEventListener('canplay', attempt, { once: true })
+            } else {
+              finishTurn()
+            }
+          })
+      }
+      attempt()
     }
-    // Warm the reverse clip NOW — during the ~5 s forward turn — so a later
+    // Warm the reverse clip NOW — during the forward turn — so a later
     // scroll-back-up starts instantly instead of stalling on a ~4 MB fetch.
-    // (It's preload="none" until here, so visitors who never reach the wall
-    // never pay for it.)
     const rev = transRevRef.current
     if (rev && rev.preload !== 'auto') {
       rev.preload = 'auto'
       rev.load()
     }
-    // Fallback to the clip's own length (or a sane default) if `ended` misfires.
-    endFallback.current = window.setTimeout(
-      finishTurn,
-      (transDur.current || 6) * 1000 + 800,
-    )
+    // Last-resort safety in case the clip never plays at all (canplay never
+    // fires); replaced by the real duration timer the moment it starts.
+    endFallback.current = window.setTimeout(finishTurn, 15000)
   }, [setPhaseBoth, lockScroll, finishTurn])
 
   // Scrolling back up from the wall plays the turn IN REVERSE (room comes back
@@ -434,7 +455,7 @@ export function StudioRoom() {
           <video
             ref={transRef}
             className={styles.transitionVid}
-            poster="/room/scene-2.jpg"
+            poster="/room/scene-1.jpg"
             muted
             playsInline
             preload="none"
